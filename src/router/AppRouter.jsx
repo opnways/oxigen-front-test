@@ -1,5 +1,6 @@
-import { Navigate, Routes } from "react-router-dom"
-import { Route } from "react-router-dom"
+import { Navigate, Routes, Route } from "react-router-dom"
+
+import { Header } from "../ui/"
 import { ProductPage } from "../product/pages/ProductPage"
 import { HomePage } from "../home/pages/HomePage"
 
@@ -7,6 +8,7 @@ import { HomePage } from "../home/pages/HomePage"
 export const AppRouter = () => {
   return (   
     <>
+    <Header />
     <Routes>
         <Route path="/" element={<HomePage />} />
     
