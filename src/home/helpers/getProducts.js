@@ -11,6 +11,6 @@ export const getProducts = async () => {
           price: product.price,
       
         }));
-        console.log(products);
+       
         return products;
     }

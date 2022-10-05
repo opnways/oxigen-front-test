@@ -5,7 +5,6 @@ export const ProductItem = (product) => {
   
   const { id, img, brand, model, price } = product;
  
-console.log(product);
   return (
     
     <div className='col-sm-3'>

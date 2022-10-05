@@ -7,24 +7,63 @@ export const HomePage = () => {
 
 const [products, setProducts] = useState([]);
 
+// real
+let results;
 const getAllProduct = async () => {
   const newProducts = await getProducts();
   setProducts(newProducts);
 }
+
 useEffect(() => {
-    getAllProduct()
+  getAllProduct();
 }, [])
 
-  return (
-    <>
-    <div className='container'>
+// real time search
+const [searchTerm, setSearchTerm] = useState("");
+const [searchResult, setSearchResult] = useState([]);
+
+const handleChange = event => {
+  setSearchTerm(event.target.value);
+};
+
+
+
+useEffect(() => {
+  const results = products.filter(product =>
+    product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.model.toLowerCase().includes(searchTerm.toLowerCase()) 
+  );
+  setSearchResult(results);
+}, [searchTerm]);
+
+if(searchResult === undefined || searchResult.length == 0){
+results = products;
+} else {
+results = searchResult;
+}
+
+return (
+  <div className='container'>
     <div className='row'>
-      {products.map((product) => (
-      
+      <div className='col-12'>
+        <h1>Home</h1>
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
+    </div>
+    <div className='row'>
+      {results.map(product => (
         <ProductItem key={product.id} {...product} />
       ))}
     </div>
-    </div>
-    </>
-  )
+  </div>
+)
 }
+
+
+
+
