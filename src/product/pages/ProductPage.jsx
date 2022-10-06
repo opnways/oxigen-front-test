@@ -2,6 +2,8 @@ import React, { useEffect, useState, } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 
+
+import { addItemToCart } from "../../home/helpers/addCart";
 import { getIndividualProduct } from "../../home/helpers/getProduct";
 export const ProductPage = () => {
 
@@ -16,7 +18,21 @@ export const ProductPage = () => {
     storageCode: null,
   });
 
-  
+  function addProduct(e) {
+    e.preventDefault();
+
+    addItemToCart(setProduct).then((res) => {
+      const productsAddedinCart = JSON.parse(localStorage.getItem("shoppingCartItems"));
+      if (productsAddedinCart !== null) {
+        const totalPorducts = productsAddedinCart + res.data.count;
+        localStorage.setItem("shoppingCartItems", JSON.stringify(totalPorducts));
+      } else {
+        localStorage.setItem("shoppingCartItems", JSON.stringify(res.data.count));
+        
+      }
+      
+    });
+  }
   useEffect(() => {
     getIndividualProduct(id).then((res) => {
       const { data } = res;
@@ -101,7 +117,7 @@ export const ProductPage = () => {
               </div>
             </div>
             <div>
-              <form >
+              <form  onSubmit={addProduct}>
                 <h1>SELECT:</h1>
                 <h3>colors</h3>
                
