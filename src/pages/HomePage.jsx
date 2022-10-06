@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { ProductItem } from '../../productItem/components/ProductItem';
-import SearchInput from '../components/SearchInput';
+import { ProductItem } from '../components/productItem/ProductItem';
+import SearchInput from '../components/searchInput/SearchInput';
 import { getProducts } from '../helpers/getProducts'
 
 export const HomePage = () => {

@@ -1,5 +1,7 @@
-const { VITE_SERVER_API } = import.meta.env;
 import axios from "axios";
+
+const { VITE_SERVER_API } = import.meta.env;
+
 export async function getProducts() {
   // check if the products are already in local storage
   const productsCache = localStorage.getItem("products");
