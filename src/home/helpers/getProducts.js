@@ -1,5 +1,5 @@
-import.meta.env.SERVER_API;
-
+const { VITE_SERVER_API } = import.meta.env;
+import axios from "axios";
 export async function getProducts() {
   // check if the products are already in local storage
   const productsCache = localStorage.getItem("products");
@@ -17,15 +17,12 @@ export async function getProducts() {
 
   // if not, fetch them from the server
 
-  const resp = await axios({
+  const data = await axios({
     method: "GET",
-    url: `${SERVER_API}api/product`,
+    url: `${VITE_SERVER_API}api/product`,
   });
-  const data = await resp.json();
-  const products = data.map((product) => ({
-    ...product,
-    img: product.imgUrl,
-  }));
+  const products = data.data;
+
   // save them in local storage
   localStorage.setItem("products", JSON.stringify(products));
   localStorage.setItem("date", new Date().getTime());
