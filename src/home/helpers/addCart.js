@@ -1,9 +1,9 @@
 import axios from "axios";
-
+const { VITE_SERVER_API } = import.meta.env;
 export async function addItemToCart({ id, colorCode, storageCode }) {
   return axios({
     method: "POST",
-    url: "https://front-test-api.herokuapp.com/api/cart",
+    url: `${VITE_SERVER_API}/api/cart`,
     data: {
       id: id,
       colorCode: colorCode,
