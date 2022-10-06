@@ -1,4 +1,6 @@
-export const getProducts = async () => {
+import.meta.env.SERVER_API;
+
+export async function getProducts() {
   // check if the products are already in local storage
   const productsCache = localStorage.getItem("products");
 
@@ -14,8 +16,11 @@ export const getProducts = async () => {
   }
 
   // if not, fetch them from the server
-  const url = "https://front-test-api.herokuapp.com/api/product";
-  const resp = await fetch(url);
+
+  const resp = await axios({
+    method: "GET",
+    url: `${SERVER_API}api/product`,
+  });
   const data = await resp.json();
   const products = data.map((product) => ({
     ...product,
@@ -25,4 +30,4 @@ export const getProducts = async () => {
   localStorage.setItem("products", JSON.stringify(products));
   localStorage.setItem("date", new Date().getTime());
   return products;
-};
+}
