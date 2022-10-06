@@ -1,9 +1,25 @@
+import { useState } from "react";
+import StorageContext from "../context";
 import { AppRouter } from "./router/AppRouter"
 
 export const ShopApp = () => {
+  const [readLocalStorage, setReadLocalStorage] = useState(false);
+
+  function toogleReadLocalStorage() {
+    setReadLocalStorage((readLocalStorage) =>
+      readLocalStorage === false ? true : false
+    );
+  }
     return (
         <>
-      <AppRouter/>
+        <StorageContext.Provider
+        value={{
+          readLocalStorage,
+
+          toogleReadLocalStorage,
+        }}
+      > <AppRouter/></StorageContext.Provider>
+     
         </>
     )
 }

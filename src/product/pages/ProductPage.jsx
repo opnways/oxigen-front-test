@@ -1,14 +1,14 @@
-import React, { useEffect, useState, } from "react";
+import React, { useContext, useEffect, useState, } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 
-
+import StorageContext from "../../../context";
 import { addItemToCart } from "../../home/helpers/addCart";
 import { getIndividualProduct } from "../../home/helpers/getProduct";
 export const ProductPage = () => {
 
   const { id } = useParams();
-  
+  const { toogleReadLocalStorage } = useContext(StorageContext);
   const [productData, setProductData] = useState();
   const [loaded, setLoaded] = useState(false);
 
@@ -30,7 +30,7 @@ export const ProductPage = () => {
         localStorage.setItem("shoppingCartItems", JSON.stringify(res.data.count));
         
       }
-      
+      toogleReadLocalStorage();
     });
   }
   useEffect(() => {
