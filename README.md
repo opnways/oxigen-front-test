@@ -45,4 +45,28 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Runs the linter to check for any errors in the code.
 
-## Learn More
+## More information
+
+## Structure
+<pre>  
+├───.github     <i>// Github actions config files </i>
+├───public
+├───context
+├───index.css
+└───src	
+    ├───components
+    |        ├───header
+    |        ├───productItem
+    |        └───searchInput
+    ├───pages
+    |       ├───HomePage
+    |       └───ProductPage           
+    |     
+    | 
+    └─--helpers <i> // Helper functions call API </i>
+</pre>
+
+
+## context
+
+Use the context to reload the number of  items  when user add item to cart
