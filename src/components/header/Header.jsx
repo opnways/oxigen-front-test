@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import StorageContext from "../../../context";
 import ShoppingCart from "../../assets/shopping-cart-icon.svg";
-
+import Logo from "../../assets/logo.svg";
 export const Header = () => {
   //clear input field if user goes back to home page
 
@@ -25,12 +25,12 @@ export const Header = () => {
     <div className="container-fluid">
       <nav className="navbar navbar-expand-sm navbar-light bg-light header">
         <NavLink className="navbar-brand leader__logo" to="/">
-          Home
+          <img src={Logo} alt="logo" className="logo" />
         </NavLink>
         <div className="breadcrumbs">
           {pathArrayLast === "product" ? (
             <>
-              <NavLink to="/">Home</NavLink> <span> {">"} Product</span>
+              <NavLink to="/">Home</NavLink> <span> {" >"} Product</span>
             </>
           ) : (
             <span>Home</span>
