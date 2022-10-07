@@ -7,7 +7,7 @@ This template is a starting point for using [Vite](https://vitejs.dev/) with [Re
 Installing and running the project is as simple as running
 
 ```sh
-yarn && yarn start
+yarn && yarn dev
 ```
 
 - Note that we recommend using yarn.
