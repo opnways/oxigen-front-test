@@ -35,6 +35,12 @@
 }
 /* END HEADER*/
 
+/* Search*/
+.field-search {
+    display: block;
+    text-align: end;
+}
+
 /* Product Card*/
 .card {
     display: flex;
@@ -65,4 +71,9 @@ button.submit {
 }
 .individual-product {
     margin-bottom: 20px;
+}
+.full-image-product {
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
