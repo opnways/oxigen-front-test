@@ -11,6 +11,12 @@ yarn && yarn start
 ```
 
 - Note that we recommend using yarn.
+### Envitonment Variables
+Create a `.env` file in the root of the project and add the following variables:
+
+```sh
+VITE_SERVER_API=https://front-test-api.herokuapp.com/
+```
 
 ## Available Scripts
 
