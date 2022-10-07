@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 
@@ -6,7 +6,6 @@ import StorageContext from "../../../context";
 import { addItemToCart } from "../../home/helpers/addCart";
 import { getIndividualProduct } from "../../home/helpers/getProduct";
 export const ProductPage = () => {
-
   const { id } = useParams();
   const { toogleReadLocalStorage } = useContext(StorageContext);
   const [productData, setProductData] = useState();
@@ -28,7 +27,6 @@ export const ProductPage = () => {
         localStorage.setItem("shoppingCartItems", JSON.stringify(totalPorducts));
       } else {
         localStorage.setItem("shoppingCartItems", JSON.stringify(res.data.count));
-        
       }
       toogleReadLocalStorage();
     });
@@ -56,24 +54,11 @@ export const ProductPage = () => {
   }
 
   if (loaded) {
-    const {
-      imgUrl,
-      brand,
-      model,
-      price,
-      cpu,
-      ram,
-      os,
-      displayResolution,
-      battery,
-      dimentions,
-      weight,
-      options,
-    } = productData;
+    const { imgUrl, brand, model, price, cpu, ram, os, displayResolution, battery, dimentions, weight, options } =
+      productData;
     const colors = [];
     const storages = [];
     function colorsOptions(colorName, colorCode) {
-      console.log(colorName);
       colors.push({ value: colorCode, label: colorName });
     }
     function storageOptions(storageName, storageCode) {
@@ -90,20 +75,18 @@ export const ProductPage = () => {
       storageOptions(name, code);
     });
 
-
-
     return (
       <div>
-        <div >
-          <div >
+        <div>
+          <div>
             <div>
-              <img  src={imgUrl} alt="product image" />
+              <img src={imgUrl} alt="product image" />
             </div>
           </div>
-          <div >
+          <div>
             <div>
               <h1>PRODUCT DETAILS</h1>
-              <div >
+              <div>
                 <div>{`Marca: ${brand}`}</div>
                 <div>{`Modelo: ${model}`}</div>
                 <div>{`Precio: ${price}`}</div>
@@ -117,21 +100,13 @@ export const ProductPage = () => {
               </div>
             </div>
             <div>
-              <form  onSubmit={addProduct}>
+              <form onSubmit={addProduct}>
                 <h1>SELECT:</h1>
                 <h3>colors</h3>
-               
-                <Select
-                
-                  onChange={choseOptionColor}
-                  options={colors}
-                />
+
+                <Select onChange={choseOptionColor} options={colors} />
                 <h3>storage</h3>
-                <Select
-                 
-                  onChange={choseOptionStorage}
-                  options={storages}
-                />
+                <Select onChange={choseOptionStorage} options={storages} />
 
                 <button type="submit">add product</button>
               </form>
@@ -143,4 +118,4 @@ export const ProductPage = () => {
   } else {
     return <div>loading</div>;
   }
-}
+};

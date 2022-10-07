@@ -1,37 +1,47 @@
-import {  useContext, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import StorageContext from '../../../context';
-import ShoppingCart from '../../assets/shopping-cart-icon.svg';
+import { useContext, useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import StorageContext from "../../../context";
+import ShoppingCart from "../../assets/shopping-cart-icon.svg";
 
 export const Header = () => {
-    //clear input field if user goes back to home page
-  
-    const [cartItemsStorage, setCarItemsStorage] = useState(null);
-    const { readLocalStorage } = useContext(StorageContext);
+  //clear input field if user goes back to home page
 
+  const [cartItemsStorage, setCarItemsStorage] = useState(null);
+  const { readLocalStorage } = useContext(StorageContext);
 
-    useEffect(() => {
-        setCarItemsStorage(JSON.parse(localStorage.getItem("shoppingCartItems")));
-      }, [readLocalStorage]);
+  // breadcrumb
+  const location = useLocation();
+  const path = location.pathname;
+  const pathArray = path.split("/");
+  const pathArrayLength = pathArray.length;
+  const pathArrayLast = pathArray[pathArrayLength - 2];
 
-
-    return (
-        <nav className="navbar navbar-expand-sm navbar-light bg-light">
-                <NavLink 
-                    className="navbar-brand" 
-                    to="/"
-                >
-                    Home
-                </NavLink>
-        
-            
-
-            
-            
-            {/*Shopping cart*/}  
-            <div className="shoppingcart">
-                {cartItemsStorage === null ? 0 : cartItemsStorage}<img src={ShoppingCart} alt="shopping cart" width="30" height="30" />
-            </div> 
-        </nav>
-    )
-}
+  if (pathArrayLast === "product") {
+  }
+  useEffect(() => {
+    setCarItemsStorage(JSON.parse(localStorage.getItem("shoppingCartItems")));
+  }, [readLocalStorage]);
+  return (
+    <div className="container-fluid">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light header">
+        <NavLink className="navbar-brand leader__logo" to="/">
+          Home
+        </NavLink>
+        <div className="breadcrumbs">
+          {pathArrayLast === "product" ? (
+            <>
+              <NavLink to="/">Home</NavLink> <span> {">"} Product</span>
+            </>
+          ) : (
+            <span>Home</span>
+          )}
+        </div>
+        {/*Shopping cart*/}
+        <div className="shopping-cart">
+          {cartItemsStorage === null ? 0 : cartItemsStorage}
+          <img src={ShoppingCart} alt="shopping cart" width="30" height="30" />
+        </div>
+      </nav>
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 
@@ -6,7 +6,6 @@ import StorageContext from "../../context";
 import { addItemToCart } from "../helpers/addCart";
 import { getIndividualProduct } from "../helpers/getProduct";
 export const ProductPage = () => {
-
   const { id } = useParams();
   const { toogleReadLocalStorage } = useContext(StorageContext);
   const [productData, setProductData] = useState();
@@ -28,7 +27,6 @@ export const ProductPage = () => {
         localStorage.setItem("shoppingCartItems", JSON.stringify(totalPorducts));
       } else {
         localStorage.setItem("shoppingCartItems", JSON.stringify(res.data.count));
-        
       }
       toogleReadLocalStorage();
     });
@@ -56,24 +54,11 @@ export const ProductPage = () => {
   }
 
   if (loaded) {
-    const {
-      imgUrl,
-      brand,
-      model,
-      price,
-      cpu,
-      ram,
-      os,
-      displayResolution,
-      battery,
-      dimentions,
-      weight,
-      options,
-    } = productData;
+    const { imgUrl, brand, model, price, cpu, ram, os, displayResolution, battery, dimentions, weight, options } =
+      productData;
     const colors = [];
     const storages = [];
     function colorsOptions(colorName, colorCode) {
-      console.log(colorName);
       colors.push({ value: colorCode, label: colorName });
     }
     function storageOptions(storageName, storageCode) {
@@ -90,50 +75,75 @@ export const ProductPage = () => {
       storageOptions(name, code);
     });
 
-
-
     return (
-      <div>
-        <div >
-          <div >
+      <div className="container individual-product">
+        <div className="row">
+          <div className="col-sm-6">
             <div>
-              <img  src={imgUrl} alt="product image" />
+              <img src={imgUrl} alt="product image" />
             </div>
           </div>
-          <div >
+          <div className="col-md-6">
             <div>
               <h1>PRODUCT DETAILS</h1>
-              <div >
-                <div>{`Marca: ${brand}`}</div>
-                <div>{`Modelo: ${model}`}</div>
-                <div>{`Precio: ${price}`}</div>
-                <div>{`CPU: ${cpu}`}</div>
-                <div>{`RAM: ${ram}`}</div>
-                <div>{`OS: ${os}`}</div>
-                <div>{`Resolution: ${displayResolution}`}</div>
-                <div>{`Battery: ${battery}`}</div>
-                <div>{`Dimentions: ${dimentions}`}</div>
-                <div>{`Weight: ${weight}`}</div>
-              </div>
+
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Marca</th>
+                    <td>{brand}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Modelo</th>
+                    <td>{model}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Precio</th>
+                    <td>{price}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">CPU</th>
+                    <td>{cpu}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">RAM</th>
+                    <td>{ram}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">OS</th>
+                    <td>{os}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Resolución</th>
+                    <td>{displayResolution}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Batería</th>
+                    <td>{battery}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Dimensiones</th>
+                    <td>{dimentions}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Peso</th>
+                    <td>{weight}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div>
-              <form  onSubmit={addProduct}>
+              <form onSubmit={addProduct}>
                 <h1>SELECT:</h1>
                 <h3>colors</h3>
-               
-                <Select
-                
-                  onChange={choseOptionColor}
-                  options={colors}
-                />
-                <h3>storage</h3>
-                <Select
-                 
-                  onChange={choseOptionStorage}
-                  options={storages}
-                />
 
-                <button type="submit">add product</button>
+                <Select onChange={choseOptionColor} options={colors} />
+                <h3>storage</h3>
+                <Select onChange={choseOptionStorage} options={storages} />
+
+                <button className="btn btn-btn btn-secondary submit" type="submit">
+                  add product
+                </button>
               </form>
             </div>
           </div>
@@ -143,4 +153,4 @@ export const ProductPage = () => {
   } else {
     return <div>loading</div>;
   }
-}
+};
