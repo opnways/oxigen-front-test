@@ -30,5 +30,9 @@ describe("getProducts", () => {
   it("should return products", async () => {
     const products = await getProducts();
     expect(products).to.be.an("array");
+    // check local storage
+    expect(localStorage.getItem("products")).to.be.an("string");
+    // check local storage Date
+    expect(localStorage.getItem("date")).to.be.an("string");
   });
 });
