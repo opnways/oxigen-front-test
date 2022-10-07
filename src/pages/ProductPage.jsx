@@ -80,7 +80,7 @@ export const ProductPage = () => {
         <div className="row">
           <div className="col-sm-6">
             <div className="full-image-product">
-              <img src={imgUrl} alt="product image" />
+              <img src={imgUrl} alt="{brand} {model}" />
             </div>
           </div>
           <div className="col-md-6">

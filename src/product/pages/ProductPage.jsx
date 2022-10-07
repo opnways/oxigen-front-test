@@ -80,7 +80,7 @@ export const ProductPage = () => {
         <div>
           <div>
             <div>
-              <img src={imgUrl} alt="product image" />
+              <img src={imgUrl} alt="{brand} {model}" />
             </div>
           </div>
           <div>
