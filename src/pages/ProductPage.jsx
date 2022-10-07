@@ -21,12 +21,20 @@ export const ProductPage = () => {
     e.preventDefault();
 
     addItemToCart(setProduct).then((res) => {
-      const productsAddedinCart = JSON.parse(localStorage.getItem("shoppingCartItems"));
+      const productsAddedinCart = JSON.parse(
+        localStorage.getItem("shoppingCartItems")
+      );
       if (productsAddedinCart !== null) {
         const totalPorducts = productsAddedinCart + res.data.count;
-        localStorage.setItem("shoppingCartItems", JSON.stringify(totalPorducts));
+        localStorage.setItem(
+          "shoppingCartItems",
+          JSON.stringify(totalPorducts)
+        );
       } else {
-        localStorage.setItem("shoppingCartItems", JSON.stringify(res.data.count));
+        localStorage.setItem(
+          "shoppingCartItems",
+          JSON.stringify(res.data.count)
+        );
       }
       toogleReadLocalStorage();
     });
@@ -54,8 +62,20 @@ export const ProductPage = () => {
   }
 
   if (loaded) {
-    const { imgUrl, brand, model, price, cpu, ram, os, displayResolution, battery, dimentions, weight, options } =
-      productData;
+    const {
+      imgUrl,
+      brand,
+      model,
+      price,
+      cpu,
+      ram,
+      os,
+      displayResolution,
+      battery,
+      dimentions,
+      weight,
+      options,
+    } = productData;
     const colors = [];
     const storages = [];
     function colorsOptions(colorName, colorCode) {
@@ -80,7 +100,7 @@ export const ProductPage = () => {
         <div className="row">
           <div className="col-sm-6">
             <div className="full-image-product">
-              <img src={imgUrl} alt="{brand} {model}" />
+              <img src={imgUrl} alt={brand + model} />
             </div>
           </div>
           <div className="col-md-6">
@@ -141,7 +161,10 @@ export const ProductPage = () => {
                 <h3>storage</h3>
                 <Select onChange={choseOptionStorage} options={storages} />
 
-                <button className="btn btn-btn btn-secondary submit" type="submit">
+                <button
+                  className="btn btn-btn btn-secondary submit"
+                  type="submit"
+                >
                   add product
                 </button>
               </form>
