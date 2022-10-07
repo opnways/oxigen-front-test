@@ -1,4 +1,4 @@
-# Getting Started with Vite + React
+# Getting Started with Vite + React + Vitest
 This template is a starting point for using [Vite](https://vitejs.dev/) with [React](https://reactjs.org/).
 
 
@@ -61,7 +61,8 @@ Runs the linter to check for any errors in the code.
     ├───pages
     |       ├───HomePage
     |       └───ProductPage           
-    |     
+    | 
+    ├───tests   
     | 
     └─--helpers <i> // Helper functions call API </i>
 </pre>
