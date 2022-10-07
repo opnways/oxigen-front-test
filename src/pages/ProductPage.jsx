@@ -10,6 +10,7 @@ export const ProductPage = () => {
   const { toogleReadLocalStorage } = useContext(StorageContext);
   const [productData, setProductData] = useState();
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
   const [setProduct, setProductState] = useState({
     id: id,
@@ -40,12 +41,18 @@ export const ProductPage = () => {
     });
   }
   useEffect(() => {
-    getIndividualProduct(id).then((res) => {
-      const { data } = res;
-
-      setProductData(data);
-      setLoaded(true);
-    });
+    getIndividualProduct(id)
+      .then((res, err) => {
+        const { data } = res;
+        console.log(res);
+        console.log(err);
+        setProductData(data);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        // if error show error page
+        setError(true);
+      });
   }, [id]);
   function choseOptionColor(e) {
     setProductState({
@@ -60,7 +67,9 @@ export const ProductPage = () => {
       storageCode: e.value,
     });
   }
-
+  if (error) {
+    return <div>Product not Exists</div>;
+  }
   if (loaded) {
     const {
       imgUrl,

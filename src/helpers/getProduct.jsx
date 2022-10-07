@@ -20,8 +20,12 @@ export async function getIndividualProduct(id) {
     method: "GET",
     url: `${VITE_SERVER_API}api/product/${id}`,
   });
-  // save them in local storage
-  localStorage.setItem(id, JSON.stringify(product));
-  localStorage.setItem("date", new Date().getTime());
+
+  if (product.status === 200) {
+    // save them in local storage
+    localStorage.setItem(id, JSON.stringify(product));
+    localStorage.setItem("date", new Date().getTime());
+  }
+
   return product;
 }
