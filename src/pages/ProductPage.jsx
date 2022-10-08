@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Select from "react-select";
 
 import StorageContext from "../../context";
+import { ImageProduct } from "../components/imageProduct/ImageProduct";
+import { ProductDescription } from "../components/producDescription/ProductDescription";
 import { addItemToCart } from "../helpers/addCart";
 import { getIndividualProduct } from "../helpers/getProduct";
 export const ProductPage = () => {
@@ -44,8 +46,6 @@ export const ProductPage = () => {
     getIndividualProduct(id)
       .then((res, err) => {
         const { data } = res;
-        console.log(res);
-        console.log(err);
         setProductData(data);
         setLoaded(true);
       })
@@ -71,20 +71,7 @@ export const ProductPage = () => {
     return <div>Product not Exists</div>;
   }
   if (loaded) {
-    const {
-      imgUrl,
-      brand,
-      model,
-      price,
-      cpu,
-      ram,
-      os,
-      displayResolution,
-      battery,
-      dimentions,
-      weight,
-      options,
-    } = productData;
+    const { imgUrl, brand, model, options } = productData;
     const colors = [];
     const storages = [];
     function colorsOptions(colorName, colorCode) {
@@ -109,58 +96,11 @@ export const ProductPage = () => {
         <div className="row">
           <div className="col-sm-6">
             <div className="full-image-product">
-              <img src={imgUrl} alt={brand + model} />
+              <ImageProduct imageData={imgUrl} altImage={brand + model} />
             </div>
           </div>
           <div className="col-md-6">
-            <div>
-              <h1>PRODUCT DETAILS</h1>
-
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <th scope="row">Marca</th>
-                    <td>{brand}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Modelo</th>
-                    <td>{model}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Precio</th>
-                    <td>{price}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">CPU</th>
-                    <td>{cpu}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">RAM</th>
-                    <td>{ram}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">OS</th>
-                    <td>{os}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Resolución</th>
-                    <td>{displayResolution}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Batería</th>
-                    <td>{battery}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Dimensiones</th>
-                    <td>{dimentions}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Peso</th>
-                    <td>{weight}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <ProductDescription data={productData} />
             <div>
               <form onSubmit={addProduct}>
                 <h1>SELECT:</h1>
