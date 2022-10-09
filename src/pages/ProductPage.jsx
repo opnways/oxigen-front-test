@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 
-import StorageContext from "../../context";
 import { ImageProduct } from "../components/imageProduct/ImageProduct";
 import { ProductDescription } from "../components/producDescription/ProductDescription";
-import { addItemToCart } from "../helpers/addCart";
 import { getIndividualProduct } from "../helpers/getProduct";
 import { useCartHook } from "../hooks/useCartHook";
 export const ProductPage = () => {
@@ -74,11 +72,9 @@ export const ProductPage = () => {
               <form onSubmit={addProduct}>
                 <h1>SELECT:</h1>
                 <h3>colors</h3>
-
                 <Select onChange={choseOptionColor} options={colors} />
                 <h3>storage</h3>
                 <Select onChange={choseOptionStorage} options={storages} />
-
                 <button
                   className="btn btn-btn btn-secondary submit"
                   type="submit"
