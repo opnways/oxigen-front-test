@@ -10,7 +10,7 @@ import { getIndividualProduct } from "../helpers/getProduct";
 import { useCartHook } from "../hooks/useCartHook";
 export const ProductPage = () => {
   const { id } = useParams();
-  const { toogleReadLocalStorage } = useContext(StorageContext);
+
   const [productData, setProductData] = useState();
   const {
     loaded,
@@ -21,29 +21,9 @@ export const ProductPage = () => {
     setProductState,
     choseOptionColor,
     choseOptionStorage,
+    addProduct,
   } = useCartHook(id);
 
-  function addProduct(e) {
-    e.preventDefault();
-    addItemToCart(setProduct).then((res) => {
-      const productsAddedinCart = JSON.parse(
-        localStorage.getItem("shoppingCartItems")
-      );
-      if (productsAddedinCart !== null) {
-        const totalPorducts = productsAddedinCart + res.data.count;
-        localStorage.setItem(
-          "shoppingCartItems",
-          JSON.stringify(totalPorducts)
-        );
-      } else {
-        localStorage.setItem(
-          "shoppingCartItems",
-          JSON.stringify(res.data.count)
-        );
-      }
-      toogleReadLocalStorage();
-    });
-  }
   useEffect(() => {
     getIndividualProduct(id)
       .then((res, err) => {
