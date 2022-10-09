@@ -7,22 +7,24 @@ import { ImageProduct } from "../components/imageProduct/ImageProduct";
 import { ProductDescription } from "../components/producDescription/ProductDescription";
 import { addItemToCart } from "../helpers/addCart";
 import { getIndividualProduct } from "../helpers/getProduct";
+import { useCartHook } from "../hooks/useCartHook";
 export const ProductPage = () => {
   const { id } = useParams();
   const { toogleReadLocalStorage } = useContext(StorageContext);
   const [productData, setProductData] = useState();
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
-  const [setProduct, setProductState] = useState({
-    id: id,
-    colorCode: null,
-    storageCode: null,
-  });
+  const {
+    loaded,
+    setLoaded,
+    error,
+    setError,
+    setProduct,
+    setProductState,
+    choseOptionColor,
+    choseOptionStorage,
+  } = useCartHook(id);
 
   function addProduct(e) {
     e.preventDefault();
-
     addItemToCart(setProduct).then((res) => {
       const productsAddedinCart = JSON.parse(
         localStorage.getItem("shoppingCartItems")
@@ -54,19 +56,7 @@ export const ProductPage = () => {
         setError(true);
       });
   }, [id]);
-  function choseOptionColor(e) {
-    setProductState({
-      ...setProduct,
-      colorCode: e.value,
-    });
-  }
 
-  function choseOptionStorage(e) {
-    setProductState({
-      ...setProduct,
-      storageCode: e.value,
-    });
-  }
   if (error) {
     return <div>Product not Exists</div>;
   }
@@ -90,7 +80,6 @@ export const ProductPage = () => {
 
       storageOptions(name, code);
     });
-
     return (
       <div className="container individual-product">
         <div className="row">
